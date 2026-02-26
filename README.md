@@ -12,4 +12,4 @@
 **Материалы:**  
 | Задание | Код | скриншот |
 |---------|-----|----------|
-| Задание №1 | [Кт1.php](https://github.com/Ashad00998/PHP/blob/main/Введение/task_01.php) | [image_task_01.png](https://github.com/Ashad00998/PHP/blob/main/Введение/Скриншот%20номер%202.png) |
+| Задание №1 | [Кт1.php](https://github.com/Ashad00998/PHP/blob/main/Введение/Кт1.php) | [image_Кт1.png](https://github.com/Ashad00998/PHP/blob/main/Введение/Скриншот%20номер%202.png) |
