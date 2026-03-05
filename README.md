@@ -7,9 +7,22 @@
 | Задание №2 | [task_02.php](https://github.com/Ashad00998/PHP/blob/main/Введение/task_02.php) | [image_task_02.png](https://github.com/Ashad00998/PHP/blob/main/Введение/Скриншот%20номер%201.png) |
 
 
-## Контрольная точка
+## Контрольная точка 1
 
 **Материалы:**  
 | Задание | Код | скриншот |
 |---------|-----|----------|
 | Задание №1 | [Кт1.php](https://github.com/Ashad00998/PHP/blob/main/Введение/Кт1.php) | [image_Кт1.png](https://github.com/Ashad00998/PHP/blob/main/Введение/Кт1.php%20скриншот.png) |
+
+
+
+
+## Контрольная точка 2
+
+**Материалы:**  
+| Задание | Код | скриншот |
+|---------|-----|----------|
+| Задание №3 | [task_03.php](https://github.com/Ashad00998/PHP/blob/main/KT2/task_3.php) | [task_03 скриншот.png](https://github.com/Ashad00998/PHP/blob/main/KT2/task_3.php%20скриншот.png) |
+
+
+
