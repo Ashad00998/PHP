@@ -1,42 +1,58 @@
-
 <?php
-/**
- * ЗАДАНИЕ 6: Рисование изображения с помощью GD
- *
- * Дополните код так, чтобы скрипт выводил одну PNG-картинку 300×150:
- * — фон светло-серый (235, 235, 240);
- * — красный залитый прямоугольник (20, 20) — (120, 100);
- * — синий залитый эллипс: центр (220, 75), ширина 100, высота 60;
- * — чёрный текст «PHP» через imagestring($img, 5, $x, $y, 'PHP', $black).
- *
- * До вывода картинки ничего не выводить: ob_start() в начале, ob_end_clean() перед header.
- */
 ob_start();
 
-if (!extension_loaded('gd')) {
-    ob_end_clean();
-    header('Content-Type: image/png');
-    header('Cache-Control: no-store');
-    echo base64_decode('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==');
-    exit;
+// Функция генерации изображения
+function get_image_data() {
+    if (!extension_loaded('gd')) {
+        // Заглушка при отсутствии GD (прозрачный пиксель)
+        return base64_decode('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==');
+    } else {
+        $img = imagecreatetruecolor(300, 150);
+        $bg = imagecolorallocate($img, 235, 235, 240);
+        imagefill($img, 0, 0, $bg);
+
+        // Красный залитый прямоугольник
+        $red   = imagecolorallocate($img, 220, 50, 50);
+        imagefilledrectangle($img, 20, 20, 120, 100, $red);
+
+        // СИНИЙ ЗАЛИТЫЙ ЭЛЛИПС (центр 220,75, ширина 100, высота 60)
+        $blue  = imagecolorallocate($img, 50, 80, 220);
+        imagefilledellipse($img, 220, 75, 100, 60, $blue);
+
+        // ЧЁРНЫЙ ТЕКСТ «PHP» (шрифт 5, координаты 130,65)
+        $black = imagecolorallocate($img, 0, 0, 0);
+        imagestring($img, 5, 130, 65, 'PHP', $black);
+
+        // Сохраняем изображение в буфер
+        ob_start();
+        imagepng($img);
+        $image_data = ob_get_clean();
+        imagedestroy($img);
+        return $image_data;
+    }
 }
 
-$img = imagecreatetruecolor(300, 150);
-$bg = imagecolorallocate($img, 235, 235, 240);
-imagefill($img, 0, 0, $bg);
-
-$red = imagecolorallocate($img, 255, 0, 0);
-imagefilledrectangle($img, 20, 20, 120, 100, $red);
-
-$blue = imagecolorallocate($img, 0, 0, 255);
-imagefilledellipse($img, 220, 75, 100, 60, $blue);
-
-$black = imagecolorallocate($img, 0, 0, 0);
-imagestring($img, 5, 130, 65, 'PHP', $black);
-
+$image_data = get_image_data();
+$base64 = base64_encode($image_data);
 ob_end_clean();
-header('Content-Type: image/png');
-header('Cache-Control: no-store');
-imagepng($img);
-imagedestroy($img);
 ?>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Задание 6: GD-изображение</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 600px; margin: 50px auto; padding: 20px; background: #f5f5f5; }
+        .block { background: #fff; padding: 20px; border-radius: 8px; text-align: center; }
+        img { border: 1px solid #ccc; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <h1>Задание 6: Рисование с GD</h1>
+    <div class="block">
+        <p>Сгенерированное PHP (GD) изображение 300×150:</p>
+        <img src="data:image/png;base64,<?= $base64 ?>" alt="GD image" width="300" height="150">
+    </div>
+    <p><a href="task_05.php">← Задание 5</a></p>
+</body>
+</html>
